@@ -1,0 +1,25 @@
+use prac10;
+
+db.prac10.createCollection("Student");
+
+db.Student.insertOne({RollNo:1,Name:"A"});
+
+db.Student.insertOne({RollNo:2,Name:"B"});
+
+db.Student.insertOne({RollNo:3,Name:"C"});
+
+db.Student.insertMany([{RollNo:4,Name:"D"},{RollNo:5,Name:"E"}]);
+
+db.Student.find();
+
+db.Student.update({RollNo:2},{$set:{class:"TE"}});
+
+db.Student.remove({RollNo:2});
+
+db.Student.find();
+
+db.Student.save({RollNo:6,Name:"F",Class:"Computer"});
+
+db.Student.find();
+
+db.Student.find({$and: [{RollNo:5},{Class: "Computer"}]}).pretty()

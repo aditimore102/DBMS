@@ -1,0 +1,19 @@
+use prac12;
+
+db.createCollection("books");
+
+db.books.insertOne({bid:1,bname:"The Alchemist",author:"Paulo Coelho",price:200,status:"A"});
+
+db.books.insertOne({bid:2,bname:"The Secret",author:"Rhonda Byrne",price:300,status:"A"});
+
+db.books.insertOne({bid:3,bname:"Eleven Minutes",author:"Paulo Coelho",price:180,status:"A"});
+
+db.books.insertOne({bid:4,bname:"The Magic",author:"Rhonda Byrne",price:320,status:"NA"});
+
+db.books.insertOne({bid:5,bname:"Hero",author:"Rhonda Byrne",price:400,status:"A"});
+
+db.books.insertOne({bid:6,bname:"YOU CAN",author:"George Matthew Adams",price:100,status:"A"});
+
+db.books.find().pretty();
+
+db.books.mapReduce(function(){emit(this.author,this.price);},function(author,prices){return Array.sum(prices)},{query:{status:"A"},out:"AuthorTotalPrices"});

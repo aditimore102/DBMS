@@ -1,0 +1,35 @@
+use prac11;
+
+db.createCollection("employee");
+
+db.employee.insertOne({_id:1,name:"A",age:23,role:"Manager",project:"Nirvana",salary:40000});
+
+db.employee.insertOne({_id:2,name:"B",age:20,role:"Developer",project:"Alexa",salary:35000,tech: [ 'Java', 'Hibernate' ]});
+
+db.employee.insertOne({_id:3,name:"C",age:22,role:"Desiner",project:"Nirvana",salary:32000,tech: [ 'React', 'Bootstrap' ]});
+
+db.employee.insertOne({_id:4,name:"D",age:25,role:"Sales",project:"Cortana",salary:28000});
+
+db.employee.find().pretty();
+
+db.employee.aggregate([{$match:{project:"Alexa"}},{$count:"People Working on Project Alexa"}]);
+
+db.employee.aggregate([{$group:{role:"$role",totalPayment:{$sum:1},min_age:{$min:"$age"}}}]);
+
+db.employee.aggregate([{$group:{_id:"$role",totalPayment:{$sum:1},max_age:{$max:"$age"}}}])
+
+db.employee.aggregate([{$group:{_id:"$role",avg_Salary:{$avg:"$salary"}}}])
+
+db.employee.aggregate([{$match:{age:{$gt:20}}}])
+
+db.employee.aggregate([{$sort:{name:1}}])
+
+db.employee.createIndex({"age":1})
+
+db.employee.createIndex({"age":1,"salary":1})
+
+db.employee.dropIndex({"age":1})
+
+db.employee.dropIndex({"age":1,"salary":1})
+
+db.employee.getIndexes()
